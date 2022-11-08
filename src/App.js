@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { WeatherProvider } from "./context/WeatherContext";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from "./components/layout/Header";
+import Main from "./components/layout/Main";
+import Footer from "./components/layout/Footer";
+import About from "./components/pages/About";
+import NotFound from "./components/pages/NotFound";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <WeatherProvider>
+        <Router>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Main />}></Route>
+            <Route path="/about" element={<About />}></Route>
+            <Route path="/notfound" element={<NotFound />}></Route>
+            <Route path="/*" element={<NotFound />}></Route>
+          </Routes>
+          <Footer />
+        </Router>
+      </WeatherProvider>
+    </>
   );
 }
 
